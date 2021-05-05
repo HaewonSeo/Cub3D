@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 22:19:27 by haseo             #+#    #+#              #
-#    Updated: 2021/05/05 23:19:22 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/06 02:36:34 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ all:		libft $(NAME)
 bonus:		all
 
 libft:
-			$(MAKE) -C $(LIBFT_DIR)
+			$(MAKE) -C $(LIBFT_DIR) bonus
 
 $(NAME):	$(OBJS)
 			$(CC) $(CFLAGS) $(LIB) -o $@ $<
