@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 03:17:02 by haseo             #+#    #+#             */
-/*   Updated: 2021/02/22 15:00:40 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/10 22:13:08 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <stdio.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 10240
+# endif
 
 typedef struct		s_list
 {
@@ -74,7 +84,6 @@ char				*ft_strdup(const char *str);
 */
 
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
@@ -88,6 +97,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+void				ft_putstr(char *s);
 
 /*
 ** Bonus part
@@ -109,5 +119,22 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 */
 
 char				*ft_itoabase(long n, char type);
+
+/*
+** gnl
+*/
+
+char				*ft_strjoin(char *s1, const char *s2);
+int					get_next_line(int fd, char **line);
+
+/*
+** cub3D
+*/
+
+void				ft_exit(const char *str);
+int					ft_isformat(char *str, char *fmt);
+void				ft_free2d(char **arr);
+int					ft_isdigit_str(const char *str);
+int					ft_lstmaxwidth(t_list *lst);
 
 #endif

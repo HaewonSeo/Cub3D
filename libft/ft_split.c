@@ -6,24 +6,11 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 20:24:01 by haseo             #+#    #+#             */
-/*   Updated: 2020/11/23 16:42:17 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/09 23:02:32 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static void		ft_free_arr(char **arr)
-{
-	size_t i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
 
 static size_t	ft_wordlen(char const *word, char c)
 {
@@ -48,7 +35,7 @@ static char		**ft_split_str(char **split_arr, char const *s, char c)
 		{
 			if (!(split_arr[j] = ft_substr(s, i, ft_wordlen(&s[i], c))))
 			{
-				ft_free_arr(split_arr);
+				ft_free2d(split_arr);
 				return (NULL);
 			}
 			j++;

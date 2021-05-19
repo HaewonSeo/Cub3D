@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/02 16:49:36 by haseo             #+#    #+#              #
-#    Updated: 2021/02/17 17:40:11 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/19 19:45:03 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,14 @@ SRCS =		ft_memset.c \
 			ft_putchar_fd.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
-			ft_putnbr_fd.c\
-			ft_itoabase.c
+			ft_putnbr_fd.c \
+			ft_itoabase.c \
+			get_next_line.c \
+			ft_putstr.c \
+			ft_exit.c \
+			ft_isformat.c \
+			ft_free2d.c \
+			ft_isdigit_str.c
 
 B_SRCS =	ft_lstnew.c \
 			ft_lstadd_front.c \
@@ -57,6 +63,8 @@ B_SRCS =	ft_lstnew.c \
 			ft_lstclear.c \
 			ft_lstiter.c \
 			ft_lstmap.c \
+			ft_lstmaxwidth.c
+
 
 OBJS		= ${SRCS:.c=.o}
 

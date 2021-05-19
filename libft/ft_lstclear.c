@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 19:38:15 by haseo             #+#    #+#             */
-/*   Updated: 2020/11/23 02:46:01 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/10 03:24:07 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list *cur;
 	t_list *tmp;
 
 	if (!lst || !del)
 		return ;
-	cur = *lst;
-	while (cur)
+	while (*lst)
 	{
-		tmp = cur->next;
-		ft_lstdelone(cur, del);
-		cur = tmp;
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
 	}
 	*lst = NULL;
 }
