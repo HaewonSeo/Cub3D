@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02_read_map.c                                      :+:      :+:    :+:   */
+/*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 01:20:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/20 22:40:11 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 20:35:21 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_map(t_cub *cub, t_list *map_lines)
 	cub->map_height = ft_lstsize(map_lines);
 	if (!(cub->map = malloc(sizeof(char *) * (cub->map_height + 1))))
 		ft_exit("[ERROR] Fail to malloc map(height)");
-	cub->map[cub->map_height] = '\0';
+	cub->map[cub->map_height] = NULL;
 	i = 0;
 	while (map_lines)
 	{
@@ -81,11 +81,10 @@ void	init_player(t_cub *cub, int i, int j)
 {
 	int degree;
 
+	degree = 0;
 	if (cub->player.spawning_orientation)
 		ft_exit("[ERROR] Invalid map content(multiple player)");
 	cub->player.spawning_orientation = cub->map[i][j];
-	// cub->player.pos_x = 2;
-	// cub->player.pos_y = 5;
 	cub->player.pos_x = 0.5f + j;
 	cub->player.pos_y = 0.5f + i;
 	cub->player.dir_x = -1.0;
@@ -95,9 +94,9 @@ void	init_player(t_cub *cub, int i, int j)
 	cub->player.move_speed = 0.07;
 	cub->player.rot_speed = 0.08;
 	if (cub->player.spawning_orientation == 'N')
-		degree = 90;
-	else if (cub->player.spawning_orientation == 'S')
 		degree = 270;
+	else if (cub->player.spawning_orientation == 'S')
+		degree = 90;
 	else if (cub->player.spawning_orientation == 'E')
 		degree = 0;
 	else if (cub->player.spawning_orientation == 'W')

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   10_save_screenshot.c                               :+:      :+:    :+:   */
+/*   save_screenshot.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:53:23 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 11:44:24 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:56:01 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	save_screenshot(t_cub *cub)
 	set_background(cub);
 	raycast_wall(cub);
 	raycast_sprite(cub, &cub->player);
+	/* */
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 00755);
 	if (fd < 0)
 		ft_exit("[ERROR] Fail to open screenshot.bmp");
@@ -61,8 +62,8 @@ void	write_bmp_data(t_cub *cub, int fd)
 	int					j;
 	int					pad;
 
-	i = cub->height;
 	pad = (4 - (cub->width * 3) % 4) % 4;
+	i = cub->height;
 	while (i >= 0)
 	{
 		j = 0;

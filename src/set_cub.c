@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_set_cub.c                                       :+:      :+:    :+:   */
+/*   set_cub.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:47:50 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/20 22:31:26 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 23:02:38 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	set_cub(t_cub *cub)
 	int i;
 
 	if (!(cub->buf = ft_calloc(cub->ele.render_y, sizeof(int **))))
-		ft_exit("[ERROR] Fail to malloc buf(map_height)");
+		ft_exit("[ERROR] Fail to malloc buf(render_y)");
 	i = -1;
 	while (++i < cub->ele.render_y)
 	{
 		if (!(cub->buf[i] = ft_calloc(cub->ele.render_x, sizeof(int *))))
-			ft_exit("[ERROR] Fail to malloc buf(map_width)");
+			ft_exit("[ERROR] Fail to malloc buf(render_x)");
 	}
 	if (!(cub->z_buf = ft_calloc(cub->ele.render_x, sizeof(double *))))
 		ft_exit("[ERROR] Fail to malloc z_buf");
@@ -83,7 +83,6 @@ void	init_sprite(t_cub *cub)
 		{
 			if (cub->map[y][x] == SPRITE)
 			{
-				/* 0.5f ? */
 				cub->sprite[i].x = 0.5f + x;
 				cub->sprite[i].y = 0.5f + y;
 				i++;

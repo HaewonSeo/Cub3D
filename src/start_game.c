@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_start_game.c                                    :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:59 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/20 23:22:36 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 23:12:08 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	start_game(t_cub *cub)
 {
-	cub->img.ptr = mlx_new_image(cub->mlx, cub->ele.render_x, cub->ele.render_y);
+	cub->img.ptr = mlx_new_image(cub->mlx, cub->width, cub->height);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.ptr,
 			&cub->img.bpp, &cub->img.size_line, &cub->img.endian);
-	cub->win = mlx_new_window(cub->mlx, cub->ele.render_x, cub->ele.render_y, TITLE);
+	cub->win = mlx_new_window(cub->mlx, cub->width, cub->height, TITLE);
 	mlx_hook(cub->win, X_EVENT_KEY_PRESS, MLX_KEYMASK, &handle_key, cub);
 	mlx_loop_hook(cub->mlx, &raycast, cub);
 	mlx_loop(cub->mlx);
@@ -47,12 +47,16 @@ void	move_forward_backward(t_cub *cub, t_player *player, double move_speed)
 	char x;
 	char y;
 
-	x = cub->map[(int)player->pos_y][(int)(player->pos_x + player->dir_x * move_speed)];
-	y = cub->map[(int)(player->pos_y + player->dir_y * move_speed)][(int)player->pos_x];
+	x = cub->map[(int)player->pos_y]
+				[(int)(player->pos_x + player->dir_x * move_speed)];
+	y = cub->map[(int)(player->pos_y + player->dir_y * move_speed)]
+				[(int)player->pos_x];
 	/* sqrt() >= 0 ?*/
-	if (x != WALL && ((sqrt(pow(cub->s_ray.x, 2) + pow(cub->s_ray.y, 2)) >= 0.2)))
+	// if (x != WALL)
+	if (x != WALL && sqrt((pow(cub->s_ray.x, 2) + pow(cub->s_ray.y, 2)) >= 0.2))
 		player->pos_x += player->dir_x * move_speed;
-	if (y != WALL)
+	// if (y != WALL)
+	if (y != WALL && sqrt((pow(cub->s_ray.x, 2) + pow(cub->s_ray.y, 2)) >= 0.2))
 		player->pos_y += player->dir_y * move_speed;
 }
 

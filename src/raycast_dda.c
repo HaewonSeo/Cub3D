@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   07_raycast_dda.c                                   :+:      :+:    :+:   */
+/*   raycast_dda.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:12 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/20 22:35:38 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 22:50:15 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_ray(t_cub *cub, t_player *player, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * x / (double)cub->ele.render_x - 1;
+	ray->camera_x = 2 * x / (double)cub->width - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x * -1;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x * -1;
 	ray->map_x = (int)player->pos_x;
