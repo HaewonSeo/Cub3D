@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:40:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:33:19 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 16:43:08 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int		main(int argc, char *argv[])
 	valid_cub(&cub);
 	set_cub(&cub);
 	if (save)
-		take_screenshot(&cub);
+		save_screenshot(&cub);
 	else
-		run_program(&cub);
+		start_game(&cub);
 	return (0);
 }
 
@@ -36,7 +36,7 @@ void	valid_arg(int argc, char *argv[], int *save)
 		ft_exit("[Usage] ./cub3d cub_file [--save]");
 	if (argc == 2)
 		*save = 0;
-	else if (ft_strcmp(argv, "--save") == 0)
+	else if (ft_strncmp(argv[2], "--save", 6) == 0)
 		*save = 1;
 	else
 		ft_exit("[Usage] ./cub3d cub_file [--save]");
@@ -48,7 +48,7 @@ void	init_cub(t_cub *cub, char *arg)
 	cub->ele.floor = -1;
 	cub->ele.ceiling = -1;
 	if (!ft_isformat(arg, ".cub"))
-		ft_exit("[ERROR] invalid .cub file format");
+		ft_exit("[ERROR] Invalid .cub file format");
 	if ((cub->fd = open(arg, O_RDONLY)) == -1)
-		ft_exit("[ERROR] fail to open .cub file");
+		ft_exit("[ERROR] Fail to open .cub file");
 }

@@ -6,33 +6,30 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:47:50 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 16:43:45 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:31:26 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void		set_cub(t_cub *cub)
+void	set_cub(t_cub *cub)
 {
 	int i;
 
-	if (!(cub->buf = ft_calloc(cub->map_height, sizeof(int **))))
+	if (!(cub->buf = ft_calloc(cub->ele.render_y, sizeof(int **))))
 		ft_exit("[ERROR] Fail to malloc buf(map_height)");
 	i = -1;
-	while (++i < cub->map_height)
+	while (++i < cub->ele.render_y)
 	{
-		if (!(cub->buf[i] = ft_calloc(cub->map_width, sizeof(int *))))
+		if (!(cub->buf[i] = ft_calloc(cub->ele.render_x, sizeof(int *))))
 			ft_exit("[ERROR] Fail to malloc buf(map_width)");
 	}
-	if (!(cub->z_buf = ft_calloc(cub->map_width, sizeof(double *))))
+	if (!(cub->z_buf = ft_calloc(cub->ele.render_x, sizeof(double *))))
 		ft_exit("[ERROR] Fail to malloc z_buf");
+	cub->mlx = mlx_init();
 	load_texture(cub);
 	init_sprite(cub);
 	calc_sprite_distance(cub);
-	cub->mlx = mlx_init();
-	cub->img.ptr = mlx_new_image(cub->mlx, cub->map_width, cub->map_height);
-	cub->img.data = (int *)mlx_get_data_addr(cub->img.ptr,
-			&cub->img.bpp, &cub->img.size_line, &cub->img.endian);
 }
 
 void	load_texture(t_cub *cub)
@@ -54,7 +51,8 @@ void	load_image_from_xpm(t_cub *cub, int *tex, char *xpm_path, t_img *img)
 	int		x;
 	int		y;
 
-	img->ptr = mlx_xpm_file_to_image(cub->mlx, xpm_path, &img->width, &img->height);
+	img->ptr = mlx_xpm_file_to_image(cub->mlx, xpm_path,
+									&img->width, &img->height);
 	img->data = (int *)mlx_get_data_addr(
 					img->ptr, &img->bpp, &img->size_line, &img->endian);
 	y = -1;
@@ -62,7 +60,8 @@ void	load_image_from_xpm(t_cub *cub, int *tex, char *xpm_path, t_img *img)
 	{
 		x = -1;
 		while (++x < img->width)
-			tex[img->width * y + x] = img->data[img->width * y + (img->width - x - 1)];
+			tex[img->width * y + x] =
+				img->data[img->width * y + (img->width - x - 1)];
 	}
 	mlx_destroy_image(cub->mlx, img->ptr);
 }

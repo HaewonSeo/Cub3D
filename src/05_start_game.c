@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:59 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:17:12 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 23:22:36 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	start_game(t_cub *cub)
 {
-	cub->win = mlx_new_window(cub->mlx, cub->map_width, cub->map_height, TITLE);
-	mlx_hook(cub->win, X_EVENT_KEY_PRESS, MLX_KEYMASK, handle_key, cub);
-	mlx_loop_hook(cub->mlx, raycast, cub);
+	cub->img.ptr = mlx_new_image(cub->mlx, cub->ele.render_x, cub->ele.render_y);
+	cub->img.data = (int *)mlx_get_data_addr(cub->img.ptr,
+			&cub->img.bpp, &cub->img.size_line, &cub->img.endian);
+	cub->win = mlx_new_window(cub->mlx, cub->ele.render_x, cub->ele.render_y, TITLE);
+	mlx_hook(cub->win, X_EVENT_KEY_PRESS, MLX_KEYMASK, &handle_key, cub);
+	mlx_loop_hook(cub->mlx, &raycast, cub);
 	mlx_loop(cub->mlx);
 }
 

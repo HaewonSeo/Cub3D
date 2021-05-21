@@ -6,30 +6,31 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:40:26 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:52:16 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 12:27:53 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include <math.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <unistd.h>
 
-#ifdef __linux__
-# include "../minilibx-linux/mlx.h"
-# include "./keycode_linux.h"
-# define MLX_KEYMASK 		1L<<0
+# if defined(__linux__)
+#  include "../minilibx-linux/mlx.h"
+#  include "./keycode_linux.h"
+#  define MLX_KEYMASK		1L<<0
 # elif defined(__APPLE__) && defined(__MACH__)
-# include "../minilibx_opengl_20191021/mlx.h"
-# include "./keycode_macos.h"
-# define MLX_KEYMASK 		0
+#  include "../minilibx_opengl_20191021/mlx.h"
+#  include "./keycode_macos.h"
+#  define MLX_KEYMASK		0
 # endif
 
 # define TITLE				"cub3D"
-# define NORTH 				0
+# define NORTH				0
 # define SOUTH				1
 # define EAST				2
 # define WEST				3
@@ -42,10 +43,9 @@
 # define SPRITE				'2'
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
+# define TEX_WIDTH			64
+# define TEX_HEIGHT 		64
 # define PI					3.1415926535897
-# define TEX_WIDTH			256
-# define TEX_HEIGHT 		256
-# define SKIP				0
 
 typedef struct		s_img
 {
@@ -139,6 +139,8 @@ typedef struct		s_cub
 	void			*win;
 	int				fd;
 	t_element		ele;
+	int				width;
+	int				height;
 	t_list			*map_lines;
 	char			**map;
 	int				map_width;
@@ -157,7 +159,6 @@ typedef struct		s_cub
 **	00_cub3d.c
 */
 
-// int					main(int argc, char **argv);
 void				valid_arg(int argc, char *argv[], int *save);
 void				init_cub(t_cub *cub, char *arg);
 
@@ -176,8 +177,8 @@ void				store_color(t_cub *cub, char *rgb_with_comma, int flag);
 */
 
 void				read_cub_map_lines(t_cub *cub);
-void				init_map(t_cub *cub);
-void				store_map(t_cub *cub);
+void				init_map(t_cub *cub, t_list *map_lines);
+void				store_map(t_cub *cub, t_list *map_lines);
 void				init_player(t_cub *cub, int i, int j);
 
 /*
@@ -194,7 +195,8 @@ void				valid_map_vertical(t_cub *cub);
 
 void				set_cub(t_cub *cub);
 void				load_texture(t_cub *cub);
-void				load_image_from_xpm(t_cub *cub, int *texture, char *path, t_img *img);
+void				load_image_from_xpm
+						(t_cub *cub, int *texture, char *path, t_img *img);
 void				init_sprite(t_cub *cub);
 void				calc_sprite_distance(t_cub *cub);
 
@@ -204,7 +206,8 @@ void				calc_sprite_distance(t_cub *cub);
 
 void				start_game(t_cub *cub);
 int					handle_key(int key, t_cub *cub);
-void				move_forward_backward(t_cub *cub, t_player *p, double move_speed);
+void				move_forward_backward
+						(t_cub *cub, t_player *p, double move_speed);
 void				move_left_right(t_cub *cub, t_player *p, double move_speed);
 void				rotate_player(t_player *p, double rot_speed);
 
@@ -222,7 +225,7 @@ void				render(t_cub *cub);
 **	07_raycast_dda.c
 */
 
-void				init_raycasting(t_cub *cub, t_player *p, t_ray *ray, int x);
+void				init_ray(t_cub *cub, t_player *p, t_ray *ray, int x);
 void				calc_step_sidedist(t_player *p, t_ray *ray);
 void				perform_dda(t_cub *cub, t_ray *ray);
 
@@ -239,7 +242,7 @@ void				set_wall_tex_y(t_cub *cub, t_ray *ray, int x);
 */
 
 void				sort_sprite(t_cub *cub);
-void				translate_sprite(t_cub *cub,
+void				transform_sprite(t_cub *cub,
 							t_player *p, t_sprite_ray *s_ray, int i);
 void				calc_sprite_height(t_cub *cub, t_sprite_ray *s_ray);
 void				calc_sprite_width(t_cub *cub, t_sprite_ray *s_ray);

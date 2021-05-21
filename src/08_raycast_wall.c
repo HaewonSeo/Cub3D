@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:24 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:17:12 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:37:53 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	calc_wall_distance(t_player *player, t_ray *ray)
 
 void	calc_wall_height(t_cub *cub, t_ray *ray)
 {
-	ray->line_height = (int)(cub->map_height / ray->perp_wall_dist);
-	ray->draw_start_y = -ray->line_height / 2 + cub->map_height / 2;
-		if (ray->draw_start_y < 0)
+	ray->line_height = (int)(cub->ele.render_y / ray->perp_wall_dist);
+	ray->draw_start_y = -ray->line_height / 2 + cub->ele.render_y / 2;
+	if (ray->draw_start_y < 0)
 		ray->draw_start_y = 0;
-	ray->draw_end_y = ray->line_height / 2 + cub->map_height / 2;
-	if (ray->draw_end_y >= cub->map_height)
-		ray->draw_end_y = cub->map_height - 1;
+	ray->draw_end_y = ray->line_height / 2 + cub->ele.render_y / 2;
+	if (ray->draw_end_y >= cub->ele.render_y)
+		ray->draw_end_y = cub->ele.render_y - 1;
 }
 
 void	set_wall_tex_x(t_player *player, t_ray *ray)
@@ -44,7 +44,7 @@ void	set_wall_tex_x(t_player *player, t_ray *ray)
 	ray->tex_x = (int)(ray->wall_x * (double)TEX_WIDTH);
 	if (ray->side == EAST || ray->side == SOUTH)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
-		/* option */
+	/* option */
 }
 
 void	set_wall_tex_y(t_cub *cub, t_ray *ray, int x)
@@ -53,7 +53,7 @@ void	set_wall_tex_y(t_cub *cub, t_ray *ray, int x)
 	int	y;
 
 	ray->step = 1.0 * TEX_HEIGHT / ray->line_height;
-	ray->tex_pos = (ray->draw_start_y - cub->map_height / 2
+	ray->tex_pos = (ray->draw_start_y - cub->ele.render_y / 2
 					+ ray->line_height / 2) * ray->step;
 	y = ray->draw_start_y;
 	while (y < ray->draw_end_y)
@@ -66,5 +66,3 @@ void	set_wall_tex_y(t_cub *cub, t_ray *ray, int x)
 		y++;
 	}
 }
-
-

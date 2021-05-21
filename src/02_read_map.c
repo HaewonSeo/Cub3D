@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 01:20:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 15:34:47 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:40:11 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,59 +19,61 @@ void	read_cub_map_lines(t_cub *cub)
 	while (get_next_line(cub->fd, &line) > 0)
 	{
 		if (line[0] == '\0')
-			break;
+			break ;
 		ft_lstadd_back(&cub->map_lines, ft_lstnew(ft_strdup(line)));
 		free(line);
 	}
 	free(line);
-	init_map(cub);
-	store_map(cub);
-	ft_lstclear(&(cub->map_lines), free);
+	init_map(cub, cub->map_lines);
+	store_map(cub, cub->map_lines);
+	ft_lstclear(&cub->map_lines, free);
 }
 
-void	init_map(t_cub *cub)
+void	init_map(t_cub *cub, t_list *map_lines)
 {
 	int	i;
 
-	cub->map_height = ft_lstsize(cub->map_lines);
-	cub->map_width = ft_lstmaxwidth(cub->map_lines);
+	cub->map_width = ft_lstmaxwidth(map_lines);
+	cub->map_height = ft_lstsize(map_lines);
 	if (!(cub->map = malloc(sizeof(char *) * (cub->map_height + 1))))
 		ft_exit("[ERROR] Fail to malloc map(height)");
 	cub->map[cub->map_height] = '\0';
 	i = 0;
-	while (cub->map_lines)
+	while (map_lines)
 	{
 		if (!(cub->map[i] = malloc(sizeof(char) * (cub->map_width + 1))))
 			ft_exit("[ERROR] Fail to malloc map(width)");
 		ft_memset(cub->map[i], ' ', cub->map_width);
 		cub->map[i][cub->map_width] = '\0';
 		i++;
-		cub->map_lines = (cub->map_lines)->next;
+		map_lines = (map_lines)->next;
 	}
 }
 
-void	store_map(t_cub *cub)
+void	store_map(t_cub *cub, t_list *map_lines)
 {
 	int		i;
 	int		j;
 	char	*content;
+	int		len_content;
 
 	i = -1;
 	while (++i < cub->map_height)
 	{
+		content = (char *)((map_lines)->content);
+		len_content = (int)ft_strlen(content);
 		j = -1;
-		content = (char *)(cub->map_lines)->content;
-		while (++j < ft_strlen(content))
+		while (++j < len_content)
 		{
-			if (!ft_strchr("012NSEW \n", (int)content[j]))
+			if (!ft_strchr("012NSEW \n", content[j]))
 				ft_exit("[ERROR] Invalid map content(012NSEW)");
 			cub->map[i][j] = content[j];
-			if (ft_strchr("NSEW", (int)content[j]))
+			if (ft_strchr("NSEW", content[j]))
 				init_player(cub, i, j);
 			else if (content[j] == SPRITE)
 				cub->num_sprite++;
 		}
-		cub->map_lines = (cub->map_lines)->next;
+		map_lines = (map_lines)->next;
 	}
 }
 

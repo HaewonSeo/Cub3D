@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 16:18:14 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/10 22:12:57 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:57:17 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_exit(const char *str)
 {
-	perror(str);
+	ft_putstr(str);
+	ft_putstr("\n");
 	exit(0);
 }

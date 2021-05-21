@@ -6,15 +6,15 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:12 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:17:12 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:35:38 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	init_ray(t_cub *s, t_player *player, t_ray *ray, int x)
+void	init_ray(t_cub *cub, t_player *player, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * x / (double)s->map_width - 1;
+	ray->camera_x = 2 * x / (double)cub->ele.render_x - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x * -1;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x * -1;
 	ray->map_x = (int)player->pos_x;
@@ -34,7 +34,8 @@ void	calc_step_sidedist(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - player->pos_x) *
+								ray->delta_dist_x;
 	}
 	if (ray->dir_y < 0)
 	{
@@ -44,11 +45,12 @@ void	calc_step_sidedist(t_player *player, t_ray *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - player->pos_y) *
+								ray->delta_dist_y;
 	}
 }
 
-void	perform_dda(t_cub *s, t_ray *ray)
+void	perform_dda(t_cub *cub, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
@@ -64,7 +66,7 @@ void	perform_dda(t_cub *s, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = (ray->step_y == 1) ? NORTH : SOUTH;
 		}
-		if (s->map[ray->map_y][ray->map_x] == WALL)
+		if (cub->map[ray->map_y][ray->map_x] == WALL)
 			ray->hit = 1;
 	}
 }

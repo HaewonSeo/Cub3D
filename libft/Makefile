@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/02 16:49:36 by haseo             #+#    #+#              #
-#    Updated: 2021/05/19 19:45:03 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/20 11:03:59 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,24 +77,25 @@ CFLAGS 		= -Wall -Wextra -Werror
 AR			= ar
 ARFLAGS		= rcs
 RM			= rm -f
+ECHO		= echo
 
 $(NAME):	${OBJS}
-			${AR} ${ARFLAGS} $@ $^
+			@${AR} ${ARFLAGS} $@ $^
 
 %.o: %.c
-			${CC} -c ${CFLAGS} -o $@ $< -I ${INC}
+			@${CC} -c ${CFLAGS} -o $@ $< -I${INC}
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS} ${B_OBJS}
+			@${RM} ${OBJS} ${B_OBJS}
 
 fclean:		clean
-			${RM} ${NAME}
+			@${RM} ${NAME}
 
 re:			fclean all
 
 bonus:		${OBJS} ${B_OBJS}
-			${AR} ${ARFLAGS} ${NAME} $^
+			@${AR} ${ARFLAGS} ${NAME} $^
 
 .PHONY: 	all clean fclean re bonus

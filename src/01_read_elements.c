@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:40:51 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/10 22:14:25 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 11:44:33 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ void	read_cub_element_lines(t_cub *cub)
 	while (get_next_line(cub->fd, &line) > 0)
 	{
 		if (line[0] == '\0')
+		{
+			free(line);
 			continue;
+		}
 		if (!(word = ft_split(line, ' ')))
 			ft_exit("[ERROR] Fail to split lines");
-		type = store_element(cub, word);
+		type = store_elements(cub, word);
 		ft_free2d(word);
 		if (type == MAP)
-			break;
+			break ;
 		free(line);
 	}
 	cub->map_lines = ft_lstnew(ft_strdup(line));
@@ -36,21 +39,21 @@ void	read_cub_element_lines(t_cub *cub)
 
 int		store_elements(t_cub *cub, char **word)
 {
-	if (ft_strcmp(word[0], "R") == 0)
+	if (ft_strncmp(word[0], "R", 1) == 0)
 		store_resolution(cub, word[1], word[2]);
-	else if (ft_strcmp(word[0], "NO") == 0)
+	else if (ft_strncmp(word[0], "NO", 2) == 0)
 		store_texture(cub, word[1], NORTH);
-	else if (ft_strcmp(word[0], "SO") == 0)
+	else if (ft_strncmp(word[0], "SO", 2) == 0)
 		store_texture(cub, word[1], SOUTH);
-	else if (ft_strcmp(word[0], "WE") == 0)
+	else if (ft_strncmp(word[0], "WE", 2) == 0)
 		store_texture(cub, word[1], WEST);
-	else if (ft_strcmp(word[0], "EA") == 0)
+	else if (ft_strncmp(word[0], "EA", 2) == 0)
 		store_texture(cub, word[1], EAST);
-	else if (ft_strcmp(word[0], "S") == 0)
+	else if (ft_strncmp(word[0], "S", 1) == 0)
 		store_texture(cub, word[1], SPR);
-	else if (ft_strcmp(word[0], "F") == 0)
+	else if (ft_strncmp(word[0], "F", 1) == 0)
 		store_color(cub, word[1], FLOOR);
-	else if (ft_strcmp(word[0], "C") == 0)
+	else if (ft_strncmp(word[0], "C", 1) == 0)
 		store_color(cub, word[1], CEILING);
 	else
 		return (MAP);
@@ -69,6 +72,8 @@ void	store_resolution(t_cub *cub, char *x, char *y)
 	cub->ele.render_x = (cub->ele.render_x < 848) ? 848 : cub->ele.render_x;
 	cub->ele.render_y = (cub->ele.render_y > 1080) ? 1080 : cub->ele.render_y;
 	cub->ele.render_y = (cub->ele.render_y < 480) ? 480 : cub->ele.render_y;
+	cub->width = cub->ele.render_x;
+	cub->height = cub->ele.render_y;
 }
 
 void	store_texture(t_cub *cub, char *xpm_path, int type)
@@ -89,7 +94,7 @@ void	store_color(t_cub *cub, char *rgb_color, int type)
 {
 	char	**rgb;
 	int		hex;
-	int		tmp;
+	int		rgb_nbr;
 	int		i;
 
 	if (!(rgb = ft_split(rgb_color, ',')))
@@ -102,10 +107,10 @@ void	store_color(t_cub *cub, char *rgb_color, int type)
 			ft_exit("[ERROR] Empty RGB value");
 		if (!ft_isdigit_str(rgb[i]))
 			ft_exit("[ERROR] Invalid RGB format");
-		tmp = ft_atoi(rgb[i]);
-		if (tmp > 255 || tmp < 0)
+		rgb_nbr = ft_atoi(rgb[i]);
+		if (rgb_nbr > 255 || rgb_nbr < 0)
 			ft_exit("[ERROR] Invalid RGB range");
-		hex = hex * 256 + tmp;
+		hex = hex * 256 + rgb_nbr;
 	}
 	if (type == FLOOR)
 		cub->ele.floor = hex;

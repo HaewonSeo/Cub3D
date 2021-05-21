@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:22:47 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/14 08:17:26 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 11:38:05 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	valid_map_horizontal(t_cub *cub)
 	{
 		if (cub->map[y][0] != ' ' && cub->map[y][0] != WALL)
 			ft_exit("[ERROR] Map is not surronded by wall(WEST)");
+		if (cub->map[y][cub->map_width - 1] != ' ' &&
+				cub->map[y][cub->map_width - 1] != WALL)
+			ft_exit("[ERROR] Map is not surronded by wall(EAST)");
 		x = 0;
 		while (++x < cub->map_width)
 		{
@@ -48,7 +51,7 @@ void	valid_map_horizontal(t_cub *cub)
 				if (cub->map[y][x - 1] != ' ' && cub->map[y][x - 1] != WALL)
 					ft_exit("[ERROR] Map is not surronded by wall(EAST)");
 				else if (x + 1 < cub->map_width &&
-							cub->map[y][x + 1] != ' ' && cub->map[y][x + 1] != WALL)
+					cub->map[y][x + 1] != ' ' && cub->map[y][x + 1] != WALL)
 					ft_exit("[ERROR] Map is not surronded by wall(WEST)");
 			}
 		}
@@ -65,6 +68,9 @@ void	valid_map_vertical(t_cub *cub)
 	{
 		if (cub->map[0][x] != ' ' && cub->map[0][x] != WALL)
 			ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
+		if (cub->map[cub->map_height - 1][x] != ' ' &&
+				cub->map[cub->map_height - 1][x] != WALL)
+			ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
 		y = 0;
 		while (++y < cub->map_height)
 		{
@@ -73,7 +79,7 @@ void	valid_map_vertical(t_cub *cub)
 				if (cub->map[y - 1][x] != ' ' && cub->map[y - 1][x] != WALL)
 					ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
 				else if (y + 1 < cub->map_height &&
-							cub->map[y + 1][x] != ' ' && cub->map[y + 1][x] != WALL)
+					cub->map[y + 1][x] != ' ' && cub->map[y + 1][x] != WALL)
 					ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
 			}
 		}

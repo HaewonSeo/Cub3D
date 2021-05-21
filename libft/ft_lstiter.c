@@ -6,13 +6,13 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 20:11:59 by haseo             #+#    #+#             */
-/*   Updated: 2020/11/23 02:46:10 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 12:48:22 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(char *))
 {
 	if (!lst || !f)
 		return ;

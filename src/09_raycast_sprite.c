@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:03:50 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 18:44:31 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 11:44:06 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	transform_sprite(t_cub *cub, t_player *player, t_sprite_ray *s_ray, int i)
 	s_ray->transform_y = s_ray->inv_det *
 		(-player->plane_y * s_ray->x + player->plane_x * s_ray->y);
 	/* screen_x ? v_move_screen?? */
-	s_ray->screen_x = (int)((cub->map_width / 2) *
+	s_ray->screen_x = (int)((cub->width / 2) *
 						(1 - s_ray->transform_x / s_ray->transform_y));
 	s_ray->v_move_screen = (int)(v_move / s_ray->transform_y);
 }
@@ -66,15 +66,15 @@ void	calc_sprite_height(t_cub *cub, t_sprite_ray *s_ray)
 	int v_div;
 
 	v_div = 1;
-	s_ray->height = (int)fabs((cub->map_height / s_ray->transform_y) / v_div);
+	s_ray->height = (int)fabs((cub->height / s_ray->transform_y) / v_div);
 	s_ray->draw_start_y =
-		cub->map_height / 2 - s_ray->height / 2 + s_ray->v_move_screen;
+		cub->height / 2 - s_ray->height / 2 + s_ray->v_move_screen;
 	if (s_ray->draw_start_y < 0)
 		s_ray->draw_start_y = 0;
 	s_ray->draw_end_y =
-		cub->map_height / 2 + s_ray->height / 2 + s_ray->v_move_screen;
-	if (s_ray->draw_end_y >= cub->map_height)
-		s_ray->draw_end_y = cub->map_height - 1;
+		cub->height / 2 + s_ray->height / 2 + s_ray->v_move_screen;
+	if (s_ray->draw_end_y >= cub->height)
+		s_ray->draw_end_y = cub->height - 1;
 }
 
 void	calc_sprite_width(t_cub *cub, t_sprite_ray *s_ray)
@@ -82,13 +82,13 @@ void	calc_sprite_width(t_cub *cub, t_sprite_ray *s_ray)
 	int u_div;
 
 	u_div = 1;
-	s_ray->width = (int)fabs((cub->map_height / s_ray->transform_y) / u_div);
+	s_ray->width = (int)fabs((cub->height / s_ray->transform_y) / u_div);
 	s_ray->draw_start_x = s_ray->screen_x - s_ray->width / 2;
 	if (s_ray->draw_start_x < 0)
 		s_ray->draw_start_x = 0;
 	s_ray->draw_end_x = s_ray->screen_x + s_ray->width / 2;
-	if (s_ray->draw_end_x >= cub->map_width)
-		s_ray->draw_end_x = cub->map_width - 1;
+	if (s_ray->draw_end_x >= cub->width)
+		s_ray->draw_end_x = cub->width - 1;
 }
 
 void	set_sprite_tex_y(t_cub *cub, t_sprite_ray *s_ray, int x)
@@ -97,16 +97,16 @@ void	set_sprite_tex_y(t_cub *cub, t_sprite_ray *s_ray, int x)
 	int draw;
 	int color;
 
-	s_ray->tex_x = (int)((256 * (x - (s_ray->screen_x - s_ray->width / 2))
-					 * TEX_WIDTH / s_ray->width) / 256);
-	if (x > 0 && x < cub->map_width &&
+	s_ray->tex_x = (int)((256 * (x - (s_ray->screen_x - s_ray->width / 2)) *
+									TEX_WIDTH / s_ray->width) / 256);
+	if (x > 0 && x < cub->width &&
 		s_ray->transform_y > 0 && s_ray->transform_y < cub->z_buf[x])
 	{
 		y = s_ray->draw_start_y;
 		while (y < s_ray->draw_end_y)
 		{
 			draw = (y - s_ray->v_move_screen) * 256 -
-					cub->map_height * 128 + s_ray->height * 128;
+					cub->height * 128 + s_ray->height * 128;
 			s_ray->tex_y = ((draw * TEX_HEIGHT) / s_ray->height) / 256;
 			color = cub->ele.tex[SPR][TEX_WIDTH * s_ray->tex_y + s_ray->tex_x];
 			if ((color & 0x00FFFFFF) != 0)

@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:53:23 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:16:28 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 11:44:24 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@ void	save_screenshot(t_cub *cub)
 	int	fd;
 	int	size;
 
-	raycast_background(cub);
+	set_background(cub);
+	raycast_wall(cub);
 	raycast_sprite(cub, &cub->player);
 	fd = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 00755);
 	if (fd < 0)
 		ft_exit("[ERROR] Fail to open screenshot.bmp");
-	size = 54 + 3 * cub->map_width * cub->map_height;
+	size = 54 + 3 * cub->width * cub->height;
 	write_bmp_header(cub, fd, size);
 	write_bmp_data(cub, fd);
 	ft_putstr("[SUCCESS] Create screenshot.bmp\n");
@@ -38,8 +39,8 @@ void	write_bmp_header(t_cub *cub, int fd, int size)
 	put_int_value(&header[2], size);
 	header[10] = (unsigned char)54;
 	header[14] = (unsigned char)40;
-	put_int_value(&header[18], cub->map_width);
-	put_int_value(&header[22], cub->map_height);
+	put_int_value(&header[18], cub->width);
+	put_int_value(&header[22], cub->height);
 	header[26] = (unsigned char)1;
 	header[28] = (unsigned char)24;
 	write(fd, header, 54);
@@ -60,12 +61,12 @@ void	write_bmp_data(t_cub *cub, int fd)
 	int					j;
 	int					pad;
 
-	i = cub->map_height;
-	pad = (4 - (cub->map_width * 3) % 4) % 4;
+	i = cub->height;
+	pad = (4 - (cub->width * 3) % 4) % 4;
 	while (i >= 0)
 	{
 		j = 0;
-		while (j < cub->map_width)
+		while (j < cub->width)
 		{
 			write(fd, &(cub->buf[i][j]), 3);
 			if (pad > 0)

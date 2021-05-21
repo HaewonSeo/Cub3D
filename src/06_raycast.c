@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:47 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/19 19:17:12 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/21 11:42:54 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	set_background(t_cub *cub)
 	int y;
 
 	y = -1;
-	while (++y < cub->map_height)
+	while (++y < cub->height)
 	{
 		x = -1;
-		while (++x < cub->map_width)
+		while (++x < cub->width)
 		{
-			if (y > cub->map_height / 2)
+			if (y > cub->height / 2)
 				cub->buf[y][x] = cub->ele.floor;
 			else
 				cub->buf[y][x] = cub->ele.ceiling;
@@ -45,7 +45,7 @@ void	raycast_wall(t_cub *cub)
 	int x;
 
 	x = -1;
-	while (++x < cub->map_width)
+	while (++x < cub->width)
 	{
 		init_ray(cub, &cub->player, &cub->ray, x);
 		calc_step_sidedist(&cub->player, &cub->ray);
@@ -85,11 +85,11 @@ void	render(t_cub *cub)
 	int y;
 
 	y = -1;
-	while (++y < cub->map_height)
+	while (++y < cub->height)
 	{
 		x = -1;
-		while (++x < cub->map_width)
-			cub->img.data[cub->map_width * y + x] = cub->buf[y][x];
+		while (++x < cub->width)
+			cub->img.data[cub->width * y + x] = cub->buf[y][x];
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.ptr, 0, 0);
 }

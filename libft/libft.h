@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 03:17:02 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/10 22:13:08 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/20 22:57:02 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putstr(char *s);
+void				ft_putstr(const char *s);
 
 /*
 ** Bonus part
@@ -110,7 +110,7 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
+void				ft_lstiter(t_list *lst, void (*f)(char *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
 
@@ -135,6 +135,6 @@ void				ft_exit(const char *str);
 int					ft_isformat(char *str, char *fmt);
 void				ft_free2d(char **arr);
 int					ft_isdigit_str(const char *str);
-int					ft_lstmaxwidth(t_list *lst);
+size_t				ft_lstmaxwidth(t_list *lst);
 
 #endif
