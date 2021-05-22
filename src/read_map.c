@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 01:20:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 20:35:21 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 14:15:26 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	init_player(t_cub *cub, int i, int j)
 	cub->player.dir_y = 0.0;
 	cub->player.plane_x = 0.0;
 	cub->player.plane_y = 0.66;
-	cub->player.move_speed = 0.07;
-	cub->player.rot_speed = 0.08;
+	cub->player.move_speed = 0.20;
+	cub->player.rot_speed = 0.13;
 	if (cub->player.spawning_orientation == 'N')
 		degree = 270;
 	else if (cub->player.spawning_orientation == 'S')

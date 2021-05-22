@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_cub3d.c                                         :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:40:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 17:10:49 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 14:33:50 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	valid_arg(int argc, char *argv[], int *save)
 		ft_exit("[Usage] ./cub3d cub_file [--save]");
 	if (argc == 2)
 		*save = 0;
-	else if (ft_strncmp(argv[2], "--save", 6) == 0)
+	else if (ft_strncmp(argv[2], "--save\0", 7) == 0)
 		*save = 1;
 	else
 		ft_exit("[Usage] ./cub3d cub_file [--save]");
@@ -51,4 +51,10 @@ void	init_cub(t_cub *cub, char *arg)
 		ft_exit("[ERROR] Invalid .cub file format");
 	if ((cub->fd = open(arg, O_RDONLY)) == -1)
 		ft_exit("[ERROR] Fail to open .cub file");
+}
+
+int		exit_game(void)
+{
+	ft_exit("[Bye] Red button is pressed");
+	return (0);
 }

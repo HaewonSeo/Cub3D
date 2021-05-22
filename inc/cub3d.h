@@ -6,27 +6,23 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/09 17:40:26 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 12:27:53 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 17:14:29 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <math.h>
 # include <fcntl.h>
-# include <signal.h>
-# include <unistd.h>
 
 # if defined(__linux__)
 #  include "../minilibx-linux/mlx.h"
 #  include "./keycode_linux.h"
-#  define MLX_KEYMASK		1L<<0
 # elif defined(__APPLE__) && defined(__MACH__)
 #  include "../minilibx_opengl_20191021/mlx.h"
 #  include "./keycode_macos.h"
-#  define MLX_KEYMASK		0
 # endif
 
 # define TITLE				"cub3D"
@@ -41,6 +37,7 @@
 # define EMPTY				'0'
 # define WALL				'1'
 # define SPRITE				'2'
+# define MLX_KEYMASK		0
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
 # define TEX_WIDTH			64
@@ -161,6 +158,7 @@ typedef struct		s_cub
 
 void				valid_arg(int argc, char *argv[], int *save);
 void				init_cub(t_cub *cub, char *arg);
+int					exit_game(void);
 
 /*
 **	01_read_elements.c
@@ -185,6 +183,7 @@ void				init_player(t_cub *cub, int i, int j);
 **	03_valid_cub.c
 */
 
+void				valid_element_lines(char *word, int cnt_word);
 void				valid_cub(t_cub *cub);
 void				valid_map_horizontal(t_cub *cub);
 void				valid_map_vertical(t_cub *cub);
@@ -218,7 +217,7 @@ void				rotate_player(t_player *p, double rot_speed);
 int					raycast(t_cub *cub);
 void				set_background(t_cub *cub);
 void				raycast_wall(t_cub *cub);
-void				raycast_sprite(t_cub *cub, t_player *p);
+void				raycast_sprite(t_cub *cub);
 void				render(t_cub *cub);
 
 /*
@@ -242,8 +241,8 @@ void				set_wall_tex_y(t_cub *cub, t_ray *ray, int x);
 */
 
 void				sort_sprite(t_cub *cub);
-void				transform_sprite(t_cub *cub,
-							t_player *p, t_sprite_ray *s_ray, int i);
+void				trans_sprite
+					(t_cub *cub, t_player *p, t_sprite_ray *s_ray, int i);
 void				calc_sprite_height(t_cub *cub, t_sprite_ray *s_ray);
 void				calc_sprite_width(t_cub *cub, t_sprite_ray *s_ray);
 void				set_sprite_tex_y(t_cub *cub, t_sprite_ray *s_ray, int x);

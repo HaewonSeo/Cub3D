@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:47 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 20:27:00 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 14:56:25 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		raycast(t_cub *cub)
 {
 	set_background(cub);
 	raycast_wall(cub);
-	raycast_sprite(cub, &cub->player);
+	raycast_sprite(cub);
 	render(cub);
 	return (0);
 }
@@ -58,7 +58,7 @@ void	raycast_wall(t_cub *cub)
 	}
 }
 
-void	raycast_sprite(t_cub *cub, t_player *player)
+void	raycast_sprite(t_cub *cub)
 {
 	int i;
 	int stripe;
@@ -67,7 +67,7 @@ void	raycast_sprite(t_cub *cub, t_player *player)
 	i = -1;
 	while (++i < cub->num_sprite)
 	{
-		transform_sprite(cub, player, &cub->s_ray, i);
+		trans_sprite(cub, &cub->player, &cub->s_ray, i);
 		calc_sprite_height(cub, &cub->s_ray);
 		calc_sprite_width(cub, &cub->s_ray);
 		stripe = cub->s_ray.draw_start_x;

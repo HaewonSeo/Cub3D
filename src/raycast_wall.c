@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:04:24 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 22:49:32 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 13:35:24 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	set_wall_tex_y(t_cub *cub, t_ray *ray, int x)
 		ray->tex_y = (int)ray->tex_pos & (TEX_HEIGHT - 1);
 		ray->tex_pos += ray->step;
 		color = cub->ele.tex[ray->side][TEX_HEIGHT * ray->tex_y + ray->tex_x];
-		// if (ray->side == NORTH || ray->side == SOUTH)
-		// 	color = (color >> 1) & 8355711;
 		cub->buf[y][x] = color;
 		y++;
 	}

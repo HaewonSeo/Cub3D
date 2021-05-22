@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 03:17:02 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/20 22:57:02 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 16:59:43 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,5 +136,6 @@ int					ft_isformat(char *str, char *fmt);
 void				ft_free2d(char **arr);
 int					ft_isdigit_str(const char *str);
 size_t				ft_lstmaxwidth(t_list *lst);
+size_t				ft_cntword(char const *s, char c);
 
 #endif

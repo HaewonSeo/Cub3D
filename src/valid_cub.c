@@ -6,11 +6,31 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:22:47 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 22:52:11 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 17:15:55 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+void	valid_element_lines(char *word, int cnt_word)
+{
+	if (ft_strncmp(word, "R\0", 2) == 0 && cnt_word != 3)
+		ft_exit("[ERROR] Invalid R line format");
+	else if (ft_strncmp(word, "NO\0", 3) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid NO line format");
+	else if (ft_strncmp(word, "SO\0", 3) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid SO line format");
+	else if (ft_strncmp(word, "WE\0", 3) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid WE line format");
+	else if (ft_strncmp(word, "EA\0", 3) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid EA line format");
+	else if (ft_strncmp(word, "S\0", 2) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid S linee format");
+	else if (ft_strncmp(word, "F\0", 2) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid F line format");
+	else if (ft_strncmp(word, "C\0", 2) == 0 && cnt_word != 2)
+		ft_exit("[ERROR] Invalid C line format");
+}
 
 void	valid_cub(t_cub *cub)
 {

@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/02 16:49:36 by haseo             #+#    #+#              #
-#    Updated: 2021/05/20 11:03:59 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/22 17:00:28 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRCS =		ft_memset.c \
 			ft_exit.c \
 			ft_isformat.c \
 			ft_free2d.c \
-			ft_isdigit_str.c
+			ft_isdigit_str.c \
+			ft_cntword.c
 
 B_SRCS =	ft_lstnew.c \
 			ft_lstadd_front.c \

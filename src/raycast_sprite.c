@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   09_raycast_sprite.c                                :+:      :+:    :+:   */
+/*   raycast_sprite.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 19:03:50 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/21 11:44:06 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 14:56:32 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	sort_sprite(t_cub *cub)
 	}
 }
 
-void	transform_sprite(t_cub *cub, t_player *player, t_sprite_ray *s_ray, int i)
+void	trans_sprite(t_cub *cub, t_player *player, t_sprite_ray *s_ray, int i)
 {
 	double v_move;
 
-	/* v_mode ? */
 	v_move = 0.0;
 	s_ray->x = cub->sprite[i].x - player->pos_x;
 	s_ray->y = cub->sprite[i].y - player->pos_y;
@@ -55,7 +54,6 @@ void	transform_sprite(t_cub *cub, t_player *player, t_sprite_ray *s_ray, int i)
 		(player->dir_y * s_ray->x - player->dir_x * s_ray->y);
 	s_ray->transform_y = s_ray->inv_det *
 		(-player->plane_y * s_ray->x + player->plane_x * s_ray->y);
-	/* screen_x ? v_move_screen?? */
 	s_ray->screen_x = (int)((cub->width / 2) *
 						(1 - s_ray->transform_x / s_ray->transform_y));
 	s_ray->v_move_screen = (int)(v_move / s_ray->transform_y);

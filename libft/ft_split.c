@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 20:24:01 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/09 23:02:32 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 16:59:18 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ static char		**ft_split_str(char **split_arr, char const *s, char c)
 	return (split_arr);
 }
 
-static size_t	ft_cnt_words(char const *s, char c)
-{
-	size_t		count;
-	int			word_start;
-
-	count = 0;
-	word_start = 1;
-	while (*s)
-	{
-		if (*s == c)
-			word_start = 1;
-		else if (word_start == 1)
-		{
-			count++;
-			word_start = 0;
-		}
-		s++;
-	}
-	return (count);
-}
-
 char			**ft_split(char const *s, char c)
 {
 	size_t		cnt_word;
@@ -75,7 +54,7 @@ char			**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	cnt_word = ft_cnt_words(s, c);
+	cnt_word = ft_cntword(s, c);
 	if (!(split_arr = ft_calloc(cnt_word + 1, sizeof(char *))))
 		return (NULL);
 	split_arr = ft_split_str(split_arr, s, c);

@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 22:19:27 by haseo             #+#    #+#              #
-#    Updated: 2021/05/20 23:29:36 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/22 14:34:53 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,14 @@ NAME 			= cub3D
 # ----------------------------------
 CC				= gcc
 CFLAGS 			= -Wall -Wextra -Werror
-CFLAGS			+= -g3 -fsanitize=address
-# CFLAGS			+= -g
+# CFLAGS			+= -g3 -fsanitize=address
+CFLAGS			+= -g
 
 # ----------------------------------
 # Command
 # ----------------------------------
 
-RM				= rm -f
+RM				= rm -rf
 MKDIR			= mkdir -p
 RMDIR			= rmdir
 ECHO			= echo
@@ -54,17 +54,17 @@ WHITE			= \033[1;37m
 # Source & Object file
 # ----------------------------------
 
-SRCS_LIST		= 00_cub3d.c \
-					01_read_elements.c \
-					02_read_map.c \
-					03_valid_cub.c \
-					04_set_cub.c \
-					05_start_game.c \
-					06_raycast.c \
-					07_raycast_dda.c \
-					08_raycast_wall.c \
-					09_raycast_sprite.c \
-					10_save_screenshot.c
+SRCS_LIST		=	cub3d.c \
+					read_elements.c \
+					read_map.c \
+					valid_cub.c \
+					set_cub.c \
+					start_game.c \
+					raycast.c \
+					raycast_dda.c \
+					raycast_wall.c \
+					raycast_sprite.c \
+					save_screenshot.c
 
 SRCS			= $(addprefix $(SRC_DIR)/, $(SRCS_LIST))
 OBJS			= $(addprefix $(OBJ_DIR)/, $(SRCS_LIST:.c=.o))
@@ -72,7 +72,6 @@ OBJS			= $(addprefix $(OBJ_DIR)/, $(SRCS_LIST:.c=.o))
 # ----------------------------------
 # Directory
 # ----------------------------------
-
 
 LIBFT_DIR		= ./libft
 INC_DIR			= ./inc
@@ -87,7 +86,7 @@ LIBFT			= libft.a
 
 OS 				= $(shell uname -s)
 ifeq ($(OS), Darwin)
-	MLX_DIR = ./mlx
+	MLX_DIR = ./minilibx_opengl_20191021
 	LIB = -lmlx -framework OpenGL -framework AppKit
 else
 	MLX_DIR = ./minilibx-linux
@@ -106,7 +105,7 @@ bonus:			all
 
 $(OBJ_DIR):
 					@$(MKDIR) $@
-					@$(ECHO) "$(GREEN)[Success]\t $(ORANGE)Create $@$(NOCOLOR)"
+					@$(ECHO) "$(GREEN)[Success]\t $(ORANGE)Create $(OBJ_DIR)$(NOCOLOR)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 					@$(CC) -c $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -o $@ $<
@@ -123,7 +122,7 @@ $(NAME):		$(OBJS)
 clean:
 					@$(MAKE) -C $(LIBFT_DIR) clean
 					@$(RM) $(OBJS)
-					@$(RMDIR) $(OBJ_DIR)
+					@$(RM) $(OBJ_DIR)
 					@$(ECHO) "$(GREEN)[Success]\t $(RED)Remove $(OBJ_DIR)$(NOCOLOR)"
 
 fclean:			clean
@@ -131,7 +130,6 @@ fclean:			clean
 					@$(RM) $(NAME)
 					@$(ECHO) "$(GREEN)[Success]\t $(RED)Remove $(NAME)$(NOCOLOR)"
 
-
 re:				fclean all
 
-.PHONY: 		all bonus $(LIBFT) $(NAME) clean fclean re
+.PHONY: 		all bonus clean fclean re

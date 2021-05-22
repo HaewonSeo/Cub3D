@@ -1,9 +1,16 @@
 C 255,202,30
 R  2147483647 2147483647
-NO ./statics/textures/christmas_blue_256.xpm
-SO ./statics/textures/christmas_red_256.xpm
-WE ./statics/textures/christmas_brown_256.xpm
-EA ./statics/textures/christmas_green_256.xpm
+NO ./statics/blue.xpm
+
+SO ./statics/Slime.xpm
+
+WE ./statics/Red10.xpm
+
+EA ./statics/brown.xpm
+
+S ./statics/barrel.xpm
+S ./statics/barrel.xpm
+
 F  200,200,200
 
 
@@ -15,9 +22,8 @@ F  200,200,200
 100001111111000000020000111111
 1111111000000000W0000000000001
 111100000000001100000002000011
-1                            1
 110000000000011110000000000011
 100000000000111000000000000011
-11000000000011100000000000111100
+110000000000111000000000001111
 110000000001111000000000000111
 111111111111111111111111111111111
