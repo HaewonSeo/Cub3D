@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 16:22:47 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/22 17:15:55 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 19:52:58 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	valid_cub(t_cub *cub)
 	if (!cub->map_width || !cub->map_height)
 		ft_exit("[ERROR] Invalid map size");
 	if (!cub->player.spawning_orientation)
-		ft_exit("[ERROR] Empty player spawning orientation");
+		ft_exit("[ERROR] Empty player's spawning orientation");
 	valid_map_horizontal(cub);
 	valid_map_vertical(cub);
 }
@@ -87,20 +87,20 @@ void	valid_map_vertical(t_cub *cub)
 	while (++x < cub->map_width)
 	{
 		if (cub->map[0][x] != ' ' && cub->map[0][x] != WALL)
-			ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
+			ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
 		if (cub->map[cub->map_height - 1][x] != ' ' &&
 				cub->map[cub->map_height - 1][x] != WALL)
-			ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
+			ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
 		y = 0;
 		while (++y < cub->map_height)
 		{
 			if (cub->map[y][x] == ' ')
 			{
 				if (cub->map[y - 1][x] != ' ' && cub->map[y - 1][x] != WALL)
-					ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
+					ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
 				else if (y + 1 < cub->map_height &&
 					cub->map[y + 1][x] != ' ' && cub->map[y + 1][x] != WALL)
-					ft_exit("[ERROR] Map is not surronded by wall(NORTH)");
+					ft_exit("[ERROR] Map is not surronded by wall(SOUTH)");
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 18:53:23 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/22 14:59:44 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 19:19:55 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	write_bmp_data(t_cub *cub, int fd)
 	int					pad;
 
 	pad = (4 - (cub->width * 3) % 4) % 4;
-	i = cub->height;
+	i = cub->height - 1;
 	while (i >= 0)
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 01:20:44 by haseo             #+#    #+#             */
-/*   Updated: 2021/05/22 14:15:26 by haseo            ###   ########.fr       */
+/*   Updated: 2021/05/22 19:26:40 by haseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void	init_player(t_cub *cub, int i, int j)
 	else if (cub->player.spawning_orientation == 'S')
 		degree = 90;
 	else if (cub->player.spawning_orientation == 'E')
-		degree = 0;
-	else if (cub->player.spawning_orientation == 'W')
 		degree = 180;
+	else if (cub->player.spawning_orientation == 'W')
+		degree = 0;
 	rotate_player(&(cub->player), degree * (PI / 180));
 }

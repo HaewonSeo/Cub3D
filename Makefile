@@ -6,7 +6,7 @@
 #    By: haseo <haseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/05 22:19:27 by haseo             #+#    #+#              #
-#    Updated: 2021/05/22 14:34:53 by haseo            ###   ########.fr        #
+#    Updated: 2021/05/22 20:16:31 by haseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME 			= cub3D
 CC				= gcc
 CFLAGS 			= -Wall -Wextra -Werror
 # CFLAGS			+= -g3 -fsanitize=address
-CFLAGS			+= -g
+# CFLAGS			+= -g
 
 # ----------------------------------
 # Command
