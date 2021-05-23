@@ -7,7 +7,7 @@ My first RayCaster with miniLibX
 3.	- ```./cub3D ./cubs/cub.cub``` : start game
 	- ```./cub3D ./cubs/cub.cub --save``` : make a screenshot.bmp
 
-## screenshot.bmp
+## Preview
 ![screenshot](./screenshot.bmp)
 
 ## Reference
