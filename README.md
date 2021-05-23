@@ -8,7 +8,7 @@ My first RayCaster with miniLibX
 	- ```./cub3D ./cubs/cub.cub --save``` : make a screenshot.bmp
 
 ## screenshot.bmp
-![screenshot](./sreenshot.bmp)
+![screenshot](./screenshot.bmp)
 
 ## Reference
 + https://lodev.org/cgtutor/raycasting.html
