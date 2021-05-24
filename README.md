@@ -13,9 +13,10 @@ This project is inspired by the world-famous eponymous 90’s game, which was th
 1. ```git clone https://github.com/HaewonSeo/Cub3D.git```
 2. ```make```
 3.	- ```./cub3D ./cubs/cub.cub``` : start a game
-	- ```./cub3D ./cubs/cub.cub --save``` : make a screenshot.bmp
-4. `Press WASD key`, `left(<-), rigth(->), up, down arrow key` : move a player
-5. `Press ESC key` : exit a game
+	- ```./cub3D ./cubs/cub.cub --save``` : It generates screenshots of the initial screen of the game in bmp format.(screenshot.bmp)
+4. `Press WASD, up/down arrow key` : move a player
+5. `Press left(<-), rigth(->) key` : rotate a player's view
+6. `Press ESC key` : exit a game
 
 + Information about the game can be set in the /cubs/*.cub file.
 + .cub files have a format and must be followed.
