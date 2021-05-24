@@ -1,11 +1,8 @@
 R 1920 1080
-NO ./statics/texture/greystone.xpm
-
+NO ./statics/texture/green.xpm
 SO ./statics/texture/red.xpm
-
-WE ./statics/texture/blue.xpm
-
-EA ./statics/texture/purplestone.xpm
+WE ./statics/texture/grey.xpm
+EA ./statics/texture/brown.xpm
 
 S        ./statics/texture/barrel.xpm
 F 200,200,200
